@@ -69,7 +69,7 @@ Available handler methods include:
 
 ```csharp
 builder.Services.AddTgBotPlay<MyBotHandler>(options => options
-    .WithToken("<telegram bot token>")
+    .WithToken("telegram bot token")
     .AsPollingClient()
     // Customize other options as needed
 );
@@ -81,9 +81,9 @@ builder.Services.AddTgBotPlay<MyBotHandler>(options => options
 
 TgBotPlay automatically sets up controller endpoints for receiving updates:
 
-- `POST TgBotPlay/{botToken}` — Main webhook endpoint for Telegram updates
-- `POST TgBotPlay/{botToken}/HookUp` — Start webhook service
-- `POST TgBotPlay/{botToken}/HookDown` — Stop webhook service
+- `POST TgBotPlay/` — Main webhook endpoint for Telegram updates
+- `POST TgBotPlay/HookUp` — Start webhook service
+- `POST TgBotPlay/HookDown` — Stop webhook service
 
 The controller route and endpoint name can be customized using `WithController(...)` in options (Defaults to `TgBotPlay`).
 
@@ -92,7 +92,7 @@ The controller route and endpoint name can be customized using `WithController(.
 ## Switching Between Polling and WebHook
 
 - **Polling**: `.AsPollingClient()`
-- **Webhook**: `.AsWebHookClient("<host name(ex. xyz.com)>", "<optional secret for additional securiry>")`
+- **Webhook**: `.AsWebHookClient("<host name(ex. xyz.com)>")`
 
 No other code changes are required!
 
@@ -136,8 +136,8 @@ builder.Services.AddHealthChecks()
 
 ```csharp
 builder.Services.AddTgBotPlay<MyBotHandler>(options => options
-    .WithToken("<telegram bot token>")
-    .AsWebHookClient("<host name(ex. xyz.com)>", "<optional secret for additional securiry>")
+    .WithToken("telegram bot token")
+    .AsWebHookClient("host name(ex. xyz.com)")
     .WithController("TgBotPlay", "TgBotPlay/[action]")
     .WithWebHookRefreshInterval(30) //minuets
 );
@@ -147,7 +147,7 @@ builder.Services.AddTgBotPlay<MyBotHandler>(options => options
 
 ```csharp
 builder.Services.AddTgBotPlay<MyBotHandler>(options => options
-    .WithToken("<telegram bot token>")
+    .WithToken("telegram bot token")
     .AsPollingClient()
     .WithPollingInterval(5) //seconds
 );
