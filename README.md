@@ -103,6 +103,7 @@ No other code changes are required!
 - `WithController(string name, string template)` — Customize controller name and route template.
 - `WithPollingInterval(double seconds = 5d)` — Set polling interval in seconds.
 - `WithWebHookRefreshInterval(double minutes = 60d)` — Set how often webhook is refreshed.
+- `SetDropPendingUpdates(bool dropPendingChanges = false)` — Set how pending messages are processed when bot starts.
 
 ---
 
