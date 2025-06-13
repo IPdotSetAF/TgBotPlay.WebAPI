@@ -10,21 +10,11 @@ public class TgBotPlayAuthorizationFilter(IOptions<TgBotPlayOptions> options) : 
 
     public void OnAuthorization(AuthorizationFilterContext context)
     {
-        var botToken = context.RouteData.Values["botToken"]?.ToString();
-        if (string.IsNullOrEmpty(botToken) || !botToken.Equals(_settings.Token))
+        var botSecret = context.HttpContext.Request.Headers["X-Telegram-Bot-Api-Secret-Token"].ToString();
+        if (string.IsNullOrEmpty(botSecret) || !botSecret.Equals(_settings.Secret))
         {
-            context.Result = new UnauthorizedObjectResult("Invalid bot token");
+            context.Result = new UnauthorizedObjectResult("Invalid bot secret token");
             return;
-        }
-
-        if (_settings.Secret != null)
-        {
-            var botSecret = context.HttpContext.Request.Headers["X-Telegram-Bot-Api-Secret-Token"].ToString();
-            if (string.IsNullOrEmpty(botSecret) || !botSecret.Equals(_settings.Secret))
-            {
-                context.Result = new UnauthorizedObjectResult("Invalid bot secret token");
-                return;
-            }
         }
     }
 }

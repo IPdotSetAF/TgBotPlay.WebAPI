@@ -18,7 +18,7 @@ public class TgBotPlayController(
 {
     private readonly TgBotPlayOptions _settings = _options.Value;
 
-    [HttpPost("{botToken}")]
+    [HttpPost]
     public async Task<IActionResult> Update(
         [FromBody] Update update,
         CancellationToken cancellationToken)
@@ -35,7 +35,7 @@ public class TgBotPlayController(
         return Ok();
     }
 
-    [HttpPost("{botToken}/HookUp")]
+    [HttpPost("HookUp")]
     public IActionResult HookUp()
     {
         try
@@ -49,7 +49,7 @@ public class TgBotPlayController(
         }
     }
 
-    [HttpPost("{botToken}/HookDown")]
+    [HttpPost("HookDown")]
     public async Task<IActionResult> HookDown()
     {
         try

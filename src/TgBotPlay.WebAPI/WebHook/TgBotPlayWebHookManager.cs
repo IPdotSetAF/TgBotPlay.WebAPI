@@ -1,7 +1,6 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Telegram.Bot;
-using TgBotPlay.WebAPI.Utils;
 
 namespace TgBotPlay.WebAPI.WebHook;
 
@@ -15,7 +14,7 @@ public class TgBotPlayWebHookManager(
 
     public async Task HookUp(CancellationToken cancellationToken)
     {
-        _logger.LogInformation($"Setting WebHook: {UrlUtils.ObfuscateWebHookUrl(_settings.WebHookUrl)}");
+        _logger.LogInformation($"Setting WebHook: {_settings.WebHookUrl}");
         try
         {
             await _bot.SetWebhook(
