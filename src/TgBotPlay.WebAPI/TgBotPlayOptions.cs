@@ -1,4 +1,6 @@
-﻿namespace TgBotPlay.WebAPI;
+﻿using TgBotPlay.WebAPI.Utils;
+
+namespace TgBotPlay.WebAPI;
 
 public class TgBotPlayOptions
 {
@@ -14,7 +16,7 @@ public class TgBotPlayOptions
     public double WebHookRefreshMinuets { get; private set; } = 60d;
 
     public string WebHookUrl =>
-        $"{Host}/{ControllerRouteTemplate.Replace("[action]", Token)}";
+        $"{Host}/{ControllerRouteTemplate.Replace("[action]", "")}";
 
     #region Setters
 
@@ -23,6 +25,11 @@ public class TgBotPlayOptions
         if (string.IsNullOrWhiteSpace(token))
             throw new ArgumentNullException("token can not be null or empty.", nameof(token));
         Token = token;
+
+        Secret = token
+            .StringToBytes()
+            .Sha1Encrypt()
+            .BytesToString();
 
         return this;
     }
@@ -34,14 +41,11 @@ public class TgBotPlayOptions
         return this;
     }
 
-    public TgBotPlayOptions AsWebHookClient(string host, string? secret = null)
+    public TgBotPlayOptions AsWebHookClient(string host)
     {
         if (string.IsNullOrWhiteSpace(host))
             throw new ArgumentNullException("host can not be null or empty.", nameof(host));
         Host = host;
-
-        if (!string.IsNullOrWhiteSpace(secret))
-            Secret = secret;
 
         ConnectionMethod = TgBotPlayConnectionMethod.WEB_HOOK;
 

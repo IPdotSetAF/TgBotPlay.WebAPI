@@ -1,7 +1,6 @@
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Options;
 using Telegram.Bot;
-using TgBotPlay.WebAPI.Utils;
 
 namespace TgBotPlay.WebAPI.HealthChecks;
 
@@ -33,7 +32,7 @@ public class TgBotPlayHealthCheck(
 
                 if (!webhookInfo.Url.Equals(_settings.WebHookUrl, StringComparison.OrdinalIgnoreCase))
                 {
-                    return HealthCheckResult.Degraded($"Webhook URL mismatch. Expected: {UrlUtils.ObfuscateWebHookUrl(_settings.WebHookUrl)}, Actual: {UrlUtils.ObfuscateWebHookUrl(webhookInfo.Url)}");
+                    return HealthCheckResult.Degraded($"Webhook URL mismatch. Expected: {_settings.WebHookUrl}, Actual: {webhookInfo.Url}");
                 }
             }
 
