@@ -21,7 +21,8 @@ public class TgBotPlayWebHookManager(
                         url: _settings.WebHookUrl,
                         allowedUpdates: _updateHandler.GetImplementedUpdateTypes(),
                         secretToken: _settings.Secret,
-                        cancellationToken: cancellationToken);
+                        cancellationToken: cancellationToken,
+                        dropPendingUpdates: _settings.DropPendingUpdates);
             _logger.LogInformation($"WebHook Successfully Set!");
         }
         catch (Exception)
