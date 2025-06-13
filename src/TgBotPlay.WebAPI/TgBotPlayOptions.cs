@@ -5,7 +5,6 @@ namespace TgBotPlay.WebAPI;
 public class TgBotPlayOptions
 {
     public string? Token { get; private set; }
-    public string? Secret { get; private set; }
     public string? Host { get; private set; }
     public TgBotPlayConnectionMethod ConnectionMethod { get; private set; } = TgBotPlayConnectionMethod.POLLING;
 
@@ -15,6 +14,9 @@ public class TgBotPlayOptions
     public double PollingSeconds { get; private set; } = 5d;
     public double WebHookRefreshMinuets { get; private set; } = 60d;
 
+    public bool DropPendingUpdates { get; private set; } = false;
+
+    public string? Secret { get; private set; }
     public string WebHookUrl =>
         $"{Host}/{ControllerRouteTemplate.Replace("[action]", "")}";
 
@@ -76,6 +78,13 @@ public class TgBotPlayOptions
     {
         WebHookRefreshMinuets = minuets;
 
+        return this;
+    }
+
+    public TgBotPlayOptions SetDropPendingUpdates(bool dropPendingChanges = false)
+    {
+        DropPendingUpdates = dropPendingChanges;
+        
         return this;
     }
 
