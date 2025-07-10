@@ -163,7 +163,7 @@ builder.Services.AddTgBotPlay<MyBotHandler>(options => options
    1. Fork this Repo.
    2. Create a new branch for your feature/bugfix in your forked Repo.
    3. Commit your changes to the new branch you just made.
-   4. Create a pull request from your branch into the `main` branch of This Repo([https://github.com/IPdotSetAF/EZButton](https://github.com/IPdotSetAF/EZButton)).
+   4. Create a pull request from your branch into the `main` branch of This Repo([https://github.com/IPdotSetAF/TgBotPlay.WebAPI](https://github.com/IPdotSetAF/TgBotPlay.WebAPI)).
 
 ---
 
