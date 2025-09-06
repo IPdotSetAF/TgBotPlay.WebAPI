@@ -2,9 +2,9 @@
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using Telegram.Bot;
+using Telegram.Bot.AspNetCore;
 using TgBotPlay.WebAPI.Polling;
 using TgBotPlay.WebAPI.WebHook;
-using TgBotPlay.WebAPI.HealthChecks;
 
 namespace TgBotPlay.WebAPI;
 
