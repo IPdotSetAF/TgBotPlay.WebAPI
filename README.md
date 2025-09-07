@@ -92,7 +92,7 @@ The controller route and endpoint name can be customized using `WithController(.
 ## Switching Between Polling and WebHook
 
 - **Polling**: `.AsPollingClient()`
-- **Webhook**: `.AsWebHookClient("<host name(ex. xyz.com)>")`
+- **Webhook**: `.AsWebHookClient("<host name(ex. https://xyz.com)>")`
 
 No other code changes are required!
 
@@ -138,7 +138,7 @@ builder.Services.AddHealthChecks()
 ```csharp
 builder.Services.AddTgBotPlay<MyBotHandler>(options => options
     .WithToken("telegram bot token")
-    .AsWebHookClient("host name(ex. xyz.com)")
+    .AsWebHookClient("host name(ex. https://xyz.com)")
     .WithController("TgBotPlay", "TgBotPlay/[action]")
     .WithWebHookRefreshInterval(30) //minuets
 );
