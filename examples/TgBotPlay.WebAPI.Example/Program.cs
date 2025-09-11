@@ -8,9 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 var botConfigSection = builder.Configuration.GetSection("TelegramBot");
 builder.Services.Configure<BotConfiguration>(botConfigSection);
+var botConfiguration = builder.Configuration.GetRequiredSection("TelegramBot").Get<BotConfiguration>()!;
+
 builder.Services.AddTgBotPlay<BotUpdateHandler>(options =>
 {
-    var botConfiguration = builder.Configuration.GetRequiredSection("TelegramBot").Get<BotConfiguration>()!;
     options
         .WithToken(botConfiguration.Token)
         .WithController("Bot", "bot/[action]");

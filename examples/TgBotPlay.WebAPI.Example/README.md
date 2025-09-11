@@ -3,7 +3,7 @@
 
 ## About
 
-This project is a simple ASP.NET Core application, which provides webhook endpoint for the Telegram Bot.
+This project is a simple ASP.NET Core application, which shows an example of using TgBotPlay to interface Telegram Bot.
 
 You can find useful information on setting up webhook for your bot in official docs:
 
@@ -21,13 +21,21 @@ This is a short description how you can test your bot locally. The description p
 
 You have to specify your Bot token in **appsettings.json**. Replace **{BotToken}** in **appsettings.json** with actual Bot token. Also you have to specify endpoint, to which Telegram will send new updates with `HostAddress` parameter:
 
-```json
-"TelegramBot": {
-    "Token": "{BotToken}",
-    "ConnectionMethod": "POLLING",
-    "Host": "https://mydomain.com"
-  }
-```
+- Polling: 
+    ```json
+    "TelegramBot": {
+        "Token": "{BotToken}",
+        "ConnectionMethod": "POLLING"
+      }
+    ```
+- Webhook:
+    ```json
+    "TelegramBot": {
+        "Token": "{BotToken}",
+        "ConnectionMethod": "WEB_HOOK",
+        "Host": "https://mydomain.com"
+      }
+    ```        
 
 you can specify separate development configuration with **appsettings.Development.json**.
 
@@ -57,3 +65,9 @@ From ngrok you get an URL to your local server. It’s important to use the `htt
 Now you can start the Bot in a local instance. Check if the port of the application matches the port on which ngrok is running.
 
 Now your bot should answer with the text from every message you send to it.
+
+---
+
+### Credits
+
+This example project is copied from [TelegramBots/Telegram.Bot.Examples](https://github.com/TelegramBots/Telegram.Bot.Examples) and addapted to TgBotPlay.
