@@ -4,12 +4,22 @@ using Telegram.Bot;
 
 namespace TgBotPlay.WebAPI;
 
+/// <summary>
+/// Health check implementation for TgBotPlay WebAPI integration.
+/// Verifies bot connectivity and webhook configuration status.
+/// </summary>
 public class TgBotPlayHealthCheck(
     ITelegramBotClient _bot,
     IOptions<TgBotPlayOptions> _options) : IHealthCheck
 {
     private readonly TgBotPlayOptions _settings = _options.Value;
 
+    /// <summary>
+    /// Performs the health check by verifying bot connectivity and webhook configuration.
+    /// </summary>
+    /// <param name="context">The health check context.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>A <see cref="HealthCheckResult"/> indicating the health status.</returns>
     public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
     {
         try

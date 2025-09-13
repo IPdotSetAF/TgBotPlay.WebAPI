@@ -4,6 +4,10 @@ using Telegram.Bot;
 
 namespace TgBotPlay.WebAPI.WebHook;
 
+/// <summary>
+/// Manages Telegram bot webhook registration and removal.
+/// Handles the communication with Telegram API for webhook lifecycle management.
+/// </summary>
 public class TgBotPlayWebHookManager(
     ITelegramBotClient _bot,
     TgBotPlayUpdateHandlerBase _updateHandler,
@@ -12,6 +16,11 @@ public class TgBotPlayWebHookManager(
 {
     private TgBotPlayOptions _settings = _options.Value;
 
+    /// <summary>
+    /// Registers the webhook with Telegram API.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>A task representing the asynchronous operation.</returns>
     public async Task HookUp(CancellationToken cancellationToken)
     {
         _logger.LogInformation($"Setting WebHook: {_settings.WebHookUrl}");
@@ -31,6 +40,11 @@ public class TgBotPlayWebHookManager(
         }
     }
 
+    /// <summary>
+    /// Removes the webhook from Telegram API.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>A task representing the asynchronous operation.</returns>
     public async Task HookDown(CancellationToken cancellationToken)
     {
         _logger.LogInformation("Removing WebHook");

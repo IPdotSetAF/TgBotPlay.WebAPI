@@ -5,6 +5,10 @@ using Microsoft.Extensions.Options;
 
 namespace TgBotPlay.WebAPI.WebHook;
 
+/// <summary>
+/// Background service that manages the Telegram bot webhook lifecycle.
+/// Automatically registers and refreshes the webhook at configured intervals.
+/// </summary>
 public class TgBotPlayWebHookService(
     IServiceProvider _serviceProvider,
     ILogger<TgBotPlayWebHookService> _logger,
@@ -15,12 +19,22 @@ public class TgBotPlayWebHookService(
 
     private readonly TgBotPlayOptions _settings = _options.Value;
 
+    /// <summary>
+    /// Executes the webhook service as a background task.
+    /// </summary>
+    /// <param name="stoppingToken">The cancellation token for stopping the service.</param>
+    /// <returns>A task representing the asynchronous operation.</returns>
     protected override Task ExecuteAsync(CancellationToken stoppingToken)
     {
         _logger.LogInformation("WebHook Service Started.");
         return KeepHookAlive(stoppingToken);
     }
 
+    /// <summary>
+    /// Keeps the webhook alive by periodically refreshing it.
+    /// </summary>
+    /// <param name="stoppingToken">The cancellation token for stopping the service.</param>
+    /// <returns>A task representing the asynchronous operation.</returns>
     private async Task KeepHookAlive(CancellationToken stoppingToken)
     {
         StoppingToken = stoppingToken;
@@ -42,6 +56,10 @@ public class TgBotPlayWebHookService(
         _logger.LogInformation("WebHook Service Stopped.");
     }
 
+    /// <summary>
+    /// Starts the webhook service manually.
+    /// </summary>
+    /// <exception cref="InvalidOperationException">Thrown when the service is already running.</exception>
     public void Start()
     {
         if (!StoppingToken.IsCancellationRequested)
@@ -50,6 +68,11 @@ public class TgBotPlayWebHookService(
         Task.Run(() => StartAsync(new CancellationToken()));
     }
 
+    /// <summary>
+    /// Stops the webhook service and removes the webhook from Telegram.
+    /// </summary>
+    /// <returns>A task representing the asynchronous operation.</returns>
+    /// <exception cref="InvalidOperationException">Thrown when the service is already stopped.</exception>
     public async Task Stop()
     {
         if (StoppingToken.IsCancellationRequested)
