@@ -2,7 +2,7 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Options;
 using Telegram.Bot;
 
-namespace TgBotPlay.WebAPI.HealthChecks;
+namespace TgBotPlay.WebAPI;
 
 public class TgBotPlayHealthCheck(
     ITelegramBotClient _bot,
