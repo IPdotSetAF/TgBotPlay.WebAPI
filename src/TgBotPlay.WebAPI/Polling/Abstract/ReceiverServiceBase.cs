@@ -12,7 +12,11 @@ public abstract class ReceiverServiceBase<TUpdateHandler>(ITelegramBotClient bot
 {
     private TgBotPlayOptions _settings = options.Value;
 
-    /// <summary>Start to service Updates with provided Update Handler class</summary>
+    /// <summary>
+    /// Starts receiving updates from Telegram bot using the configured update handler.
+    /// </summary>
+    /// <param name="stoppingToken">The cancellation token for stopping the receiver.</param>
+    /// <returns>A task representing the asynchronous operation.</returns>
     public async Task ReceiveAsync(CancellationToken stoppingToken)
     {
         // ToDo: we can inject ReceiverOptions through IOptions container
