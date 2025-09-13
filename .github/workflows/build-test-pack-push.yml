@@ -1,0 +1,30 @@
+name: Build Test Pack Push
+
+on:
+  workflow_call:
+  workflow_dispatch: 
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+    - name: Restore dependencies
+      run: dotnet restore ./src/TgBotPlay.WebAPI
+    - name: Build
+      run: dotnet build --no-restore ./src/TgBotPlay.WebAPI --configuration Release
+    - name: Test
+      run: dotnet test --no-build --verbosity normal ./src/TgBotPlay.WebAPI
+    - name: Push Package to NuGet.org
+      if: github.ref_type == 'tag'
+      run: dotnet nuget push **\*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json --skip-duplicate
+
