@@ -39,6 +39,8 @@
     "globalMetadata": {
       "_appName": "TgBotPlay.WebAPI",
       "_appTitle": "TgBotPlay.WebAPI",
+      "_appLogoPath": "images/logo.svg",
+      "_appFaviconPath": "images/favicon.svg",
       "_enableSearch": true,
       "pdf": true
     }
