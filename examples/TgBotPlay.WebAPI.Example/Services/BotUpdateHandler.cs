@@ -59,7 +59,7 @@ public class BotUpdateHandler(
     {
         await bot.SendChatAction(msg.Chat, ChatAction.UploadPhoto);
         await Task.Delay(2000); // simulate a long task
-        await using var fileStream = new FileStream("Files/bot.gif", FileMode.Open, FileAccess.Read);
+        await using var fileStream = new FileStream("Files/TgBotPlay.jpg", FileMode.Open, FileAccess.Read);
         return await bot.SendPhoto(msg.Chat, fileStream, caption: "Read https://telegrambots.github.io/book/");
     }
 
