@@ -14,25 +14,25 @@ TgBotPlay.WebAPI is designed to eliminate the complexity of setting up Telegram 
 
 ## Key Features
 
-### 🚀 Easy Setup
+### Easy Setup
 Register all bot services with a single extension method for `IServiceCollection`. No complex configuration required.
 
-### 🎯 Unified Handler Base
+### Unified Handler Base
 Implement your bot logic by inheriting from `TgBotPlayUpdateHandlerBase`. Only handle the events you care about - the framework automatically discovers and registers your handlers.
 
-### 🔄 Flexible Connection Methods
+### Flexible Connection Methods
 Switch between Polling and WebHook modes by changing a single option. No code changes required when switching between development and production environments.
 
-### 🔍 Automatic Event Subscription
+### Automatic Event Subscription
 Only the handler methods you implement are subscribed to Telegram events. No manual registration or complex event wiring needed.
 
-### 🌐 WebAPI Integration
+### WebAPI Integration
 Out-of-the-box API endpoints for Telegram WebHook with configurable controller routes and names.
 
-### 🏥 Health Checks
+### Health Checks
 Built-in health checks for bot connectivity and webhook status monitoring.
 
-### ⚙️ Customizable Options
+### Customizable Options
 Easily customize polling intervals, webhook refresh intervals, endpoint URLs, and security settings.
 
 ## Architecture Overview
@@ -75,7 +75,7 @@ TgBotPlay.WebAPI is built on top of the official [Telegram.Bot](https://github.c
 
 ## License
 
-This project is open source and available under the [MIT License](https://github.com/IPdotSetAF/TgBotPlay.WebAPI/blob/main/LICENSE).
+This project is open source and available under the [LGPL-2.1 License](https://github.com/IPdotSetAF/TgBotPlay.WebAPI/blob/main/LICENSE).
 
 ## Contributing
 
@@ -83,6 +83,6 @@ We welcome contributions! Please see our [Contributing Guidelines](https://githu
 
 ## Support
 
-- 📖 [Documentation](https://github.com/IPdotSetAF/TgBotPlay.WebAPI)
-- 🐛 [Issue Tracker](https://github.com/IPdotSetAF/TgBotPlay.WebAPI/issues)
-- 💬 [Discussions](https://github.com/IPdotSetAF/TgBotPlay.WebAPI/discussions)
+- [Documentation](https://github.com/IPdotSetAF/TgBotPlay.WebAPI)
+- [Issue Tracker](https://github.com/IPdotSetAF/TgBotPlay.WebAPI/issues)
+- [Discussions](https://github.com/IPdotSetAF/TgBotPlay.WebAPI/discussions)

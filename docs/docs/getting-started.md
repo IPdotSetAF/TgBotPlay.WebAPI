@@ -88,7 +88,7 @@ Start your application:
 dotnet run
 ```
 
-Your bot is now running and will respond to messages! 🎉
+Your bot is now running and will respond to messages!
 
 ## Quick Examples
 

@@ -1,6 +1,6 @@
 # TgBotPlay.WebAPI
 
-<img src="TgBotPlay.svg" width=150>
+<img src="logo/logo-shape.svg" width=150>
 
 A package for effortlessly bootstrapping Telegram Bots in .NET WebAPI projects.  
 Supports both **Polling** and **WebHook** workflows with a unified interface and minimal configuration.
