@@ -2,3 +2,17 @@
   href: introduction.md
 - name: Getting Started
   href: getting-started.md
+- name: Configuration
+  href: configuration.md
+- name: Update Handlers
+  href: handlers.md
+- name: Webhook Setup
+  href: webhook.md
+- name: Polling Setup
+  href: polling.md
+- name: API Reference
+  href: api-reference.md
+- name: Examples
+  href: examples.md
+- name: Troubleshooting
+  href: troubleshooting.md
