@@ -4,7 +4,6 @@
     <TargetFrameworks>net9.0;net8.0;net7.0;net6.0;</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>TgBotPlay.WebAPI</PackageId>
-    <Version>1.0.0</Version>
     <Authors>Mohammad Mahdi Nazari</Authors>
     <Company>IPdotSetAF</Company>
     <Description>A comprehensive WebAPI integration library for Telegram Bot development with support for both polling and webhook modes, health checks, and flexible configuration options.</Description>
@@ -15,7 +14,6 @@
     <PackageTags>telegram;bot;webapi;aspnetcore;polling;webhook</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>icon.png</PackageIcon>
-    <PackageReleaseNotes>Initial release of TgBotPlay.WebAPI with support for polling and webhook modes, health checks, and comprehensive configuration options.</PackageReleaseNotes>
     <Copyright>IPdotSetAF © 2025</Copyright>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <IncludeSymbols>true</IncludeSymbols>

@@ -2,10 +2,24 @@ name: Build Test Pack Push
 
 on:
   workflow_call:
-  workflow_dispatch: 
+  workflow_dispatch:
+    inputs:
+      release_notes:
+        description: "Release notes"
+        required: true
+      version:
+        description: "Release version" 
+        required: true
   pull_request:
     branches:
       - main
+
+env:
+  PROJECT_PATH: ./src/TgBotPlay.WebAPI
+  UNITTEST_PATH: 
+  CONFIGURATION: Release
+  RELEASE_NOTES: ${{ inputs.release_notes }}
+  VERSION: ${{ inputs.version }}
 
 jobs:
   build:
@@ -19,11 +33,11 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Restore dependencies
-      run: dotnet restore ./src/TgBotPlay.WebAPI
+      run: dotnet restore $PROJECT_PATH
     - name: Build
-      run: dotnet build --no-restore ./src/TgBotPlay.WebAPI --configuration Release
-    - name: Test
-      run: dotnet test --no-build --verbosity normal ./src/TgBotPlay.WebAPI
+      run: dotnet build $PROJECT_PATH --no-restore --configuration $CONFIGURATION -p:Version=$VERSION "-p:ReleaseNotes=\"$RELEASE_NOTES\""
+    # - name: Test
+    #   run: dotnet test $UNITTEST_PATH --verbosity normal --configuration $CONFIGURATION
     - name: Push Package to NuGet.org
       if: github.ref_type == 'tag'
       run: dotnet nuget push **\*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json --skip-duplicate
