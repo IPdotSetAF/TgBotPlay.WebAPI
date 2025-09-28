@@ -26,7 +26,7 @@ env:
   UNITTEST_PATH: 
   CONFIGURATION: Release
   RELEASE_NOTES: ${{ inputs.release_notes }}
-  VERSION: ${{ inputs.version }}
+  VERSION: ${{ inputs.version || '0.0.1'}}
 
 jobs:
   build:
@@ -47,9 +47,9 @@ jobs:
     #   run: dotnet test $UNITTEST_PATH --verbosity normal --configuration $CONFIGURATION
     - name: Push Package to NuGet.org
       if: ${{ inputs.wfl_call }}
-      run: dotnet nuget push **\*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json --skip-duplicate
+      run: dotnet nuget push **\*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate
     - name: Tag and push
       if: ${{ inputs.wfl_call }}
       run: |
-        git tag $VERSION
+        git tag v$VERSION
         git push --tags

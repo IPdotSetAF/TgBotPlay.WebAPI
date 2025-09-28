@@ -7,7 +7,7 @@ on:
         description: "Release notes"
         required: true
       version:
-        description: "Release version" 
+        description: "Release version (ex: 1.0.0)" 
         required: true
 
 permissions:
@@ -21,6 +21,7 @@ jobs:
       with:
         release_notes: ${{ inputs.release_notes }}
         version: ${{ inputs.version }}
+      secrets: inherit 
     
     release:
       runs-on: ubuntu-latest
@@ -29,7 +30,7 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ inputs.version }}
+          tag_name: v${{ inputs.version }}
           body: |
             ## Release Notes
             ${{ inputs.release_notes }}
