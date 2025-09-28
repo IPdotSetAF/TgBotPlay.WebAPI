@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Http;
 using Microsoft.Extensions.Options;
 using Telegram.Bot;
 using Telegram.Bot.AspNetCore;
@@ -24,8 +25,15 @@ public static class TgBotPlayExtensions
     {
         var settings = services.ConfigureSettings(options);
 
-        services.AddHttpClient("TgBotPlayClient").RemoveAllLoggers().AddTypedClient<ITelegramBotClient>(
-                    httpClient => new TelegramBotClient(settings.Token!, httpClient));
+        services.AddHttpClient("TgBotPlayClient")
+#if NET8_0_OR_GREATER
+            .RemoveAllLoggers()
+#endif
+            .AddTypedClient<ITelegramBotClient>(
+                    httpClient => new TelegramBotClient(new TelegramBotClientOptions(settings.Token!), httpClient));
+#if NET6_0 || NET7_0
+        services.RemoveAll<IHttpMessageHandlerBuilderFilter>();
+#endif
 
         services.AddScoped<TgBotPlayUpdateHandlerBase, TUpdateHandler>();
 
