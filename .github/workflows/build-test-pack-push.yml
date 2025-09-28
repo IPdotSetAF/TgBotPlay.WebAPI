@@ -2,14 +2,21 @@ name: Build Test Pack Push
 
 on:
   workflow_call:
-  workflow_dispatch:
     inputs:
+      wfl_call:
+        description: 'is called from workflow'
+        type: boolean
+        required: false
+        default: true
       release_notes:
-        description: "Release notes"
+        description: 'Release notes'
+        type: string
         required: true
       version:
-        description: "Release version" 
+        description: 'Release version'
+        type: string
         required: true
+  workflow_dispatch:
   pull_request:
     branches:
       - main
@@ -39,6 +46,10 @@ jobs:
     # - name: Test
     #   run: dotnet test $UNITTEST_PATH --verbosity normal --configuration $CONFIGURATION
     - name: Push Package to NuGet.org
-      if: github.ref_type == 'tag'
+      if: ${{ inputs.wfl_call }}
       run: dotnet nuget push **\*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json --skip-duplicate
-
+    - name: Tag and push
+      if: ${{ inputs.wfl_call }}
+      run: |
+        git tag $VERSION
+        git push --tags

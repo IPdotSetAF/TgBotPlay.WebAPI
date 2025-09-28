@@ -1,9 +1,14 @@
 name: Build Test Pack Push Release
 
 on:
-  push:
-    tags:
-      - "v*"
+  workflow_dispatch:
+    inputs:
+      release_notes:
+        description: "Release notes"
+        required: true
+      version:
+        description: "Release version" 
+        required: true
 
 permissions:
   contents: write
@@ -13,15 +18,20 @@ permissions:
 jobs:
     build-test-pack-push:
       uses: ./.github/workflows/build-test-pack-push.yml
-      if: github.ref_type == 'tag'
+      with:
+        release_notes: ${{ inputs.release_notes }}
+        version: ${{ inputs.version }}
     
-    push-release:
+    release:
       runs-on: ubuntu-latest
       needs: [ build-test-pack-push ]
-      if: github.ref_type == 'tag'
       steps:
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ inputs.version }}
+          body: |
+            ## Release Notes
+            ${{ inputs.release_notes }}
           prerelease: true
           generate_release_notes: true

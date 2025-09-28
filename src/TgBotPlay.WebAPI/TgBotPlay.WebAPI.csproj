@@ -13,7 +13,7 @@
     <PackageLicenseExpression>LGPL-2.1</PackageLicenseExpression>
     <PackageTags>telegram;bot;webapi;aspnetcore;polling;webhook</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageIcon>icon.png</PackageIcon>
+    <PackageIcon>TgBotPlay.svg</PackageIcon>
     <Copyright>IPdotSetAF © 2025</Copyright>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <IncludeSymbols>true</IncludeSymbols>
