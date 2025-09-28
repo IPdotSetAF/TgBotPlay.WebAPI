@@ -1,0 +1,55 @@
+name: Build Test Pack Push
+
+on:
+  workflow_call:
+    inputs:
+      wfl_call:
+        description: 'is called from workflow'
+        type: boolean
+        required: false
+        default: true
+      release_notes:
+        description: 'Release notes'
+        type: string
+        required: true
+      version:
+        description: 'Release version'
+        type: string
+        required: true
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+
+env:
+  PROJECT_PATH: ./src/TgBotPlay.WebAPI
+  UNITTEST_PATH: 
+  CONFIGURATION: Release
+  RELEASE_NOTES: ${{ inputs.release_notes }}
+  VERSION: ${{ inputs.version || '0.0.1'}}
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+    - name: Restore dependencies
+      run: dotnet restore $PROJECT_PATH
+    - name: Build
+      run: dotnet build $PROJECT_PATH --no-restore --configuration $CONFIGURATION -p:Version=$VERSION "-p:ReleaseNotes=\"$RELEASE_NOTES\""
+    # - name: Test
+    #   run: dotnet test $UNITTEST_PATH --verbosity normal --configuration $CONFIGURATION
+    - name: Push Package to NuGet.org
+      if: ${{ inputs.wfl_call }}
+      run: dotnet nuget push **\*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate
+    - name: Tag and push
+      if: ${{ inputs.wfl_call }}
+      run: |
+        git tag v$VERSION
+        git push --tags

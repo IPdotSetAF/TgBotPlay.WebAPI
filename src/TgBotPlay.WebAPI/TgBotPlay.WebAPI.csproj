@@ -1,13 +1,41 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFrameworks>net9.0;net8.0;net7.0;net6.0;</TargetFrameworks>
+    <LangVersion>12.0</LangVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>TgBotPlay.WebAPI</PackageId>
+    <Authors>Mohammad Mahdi Nazari</Authors>
+    <Company>IPdotSetAF</Company>
+    <Description>A comprehensive WebAPI integration library for Telegram Bot development with support for both polling and webhook modes, health checks, and flexible configuration options.</Description>
+    <PackageProjectUrl>https://github.com/IPdotSetAF/TgBotPlay.WebAPI</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/IPdotSetAF/TgBotPlay.WebAPI</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>LGPL-2.1-or-later</PackageLicenseExpression>
+    <PackageTags>telegram;bot;webapi;aspnetcore;polling;webhook</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>logo.jpg</PackageIcon>
+    <Copyright>IPdotSetAF © 2025</Copyright>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(PackageId).xml</DocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Telegram.Bot.AspNetCore" Version="22.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="../../README.md" Pack="true" PackagePath="\" />
+    <None Include="../../logo/logo.jpg" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>
