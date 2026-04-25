@@ -30,7 +30,7 @@ public static class TgBotPlayExtensions
             .RemoveAllLoggers()
 #endif
             .AddTypedClient<ITelegramBotClient>(
-                    httpClient => new TelegramBotClient(new TelegramBotClientOptions(settings.Token!), httpClient));
+                    httpClient => new TelegramBotClient(new TelegramBotClientOptions(settings.Token!, settings.TelegramBotBaseUrl), httpClient));
 #if NET6_0 || NET7_0
         services.RemoveAll<IHttpMessageHandlerBuilderFilter>();
 #endif

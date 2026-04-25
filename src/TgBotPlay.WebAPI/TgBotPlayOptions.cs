@@ -1,4 +1,5 @@
-﻿using TgBotPlay.WebAPI.Utils;
+﻿using Microsoft.Extensions.Hosting;
+using TgBotPlay.WebAPI.Utils;
 
 namespace TgBotPlay.WebAPI;
 
@@ -12,12 +13,12 @@ public class TgBotPlayOptions
     /// Gets the Telegram bot token for authentication.
     /// </summary>
     public string? Token { get; private set; }
-    
+
     /// <summary>
     /// Gets the host URL for webhook configuration.
     /// </summary>
     public string? Host { get; private set; }
-    
+
     /// <summary>
     /// Gets the connection method used for receiving updates (polling or webhook).
     /// </summary>
@@ -27,7 +28,7 @@ public class TgBotPlayOptions
     /// Gets the route template for the controller actions.
     /// </summary>
     public string ControllerRouteTemplate { get; private set; } = "TgBotPlay/[action]";
-    
+
     /// <summary>
     /// Gets the name of the controller.
     /// </summary>
@@ -37,7 +38,7 @@ public class TgBotPlayOptions
     /// Gets the polling interval in seconds.
     /// </summary>
     public double PollingSeconds { get; private set; } = 5d;
-    
+
     /// <summary>
     /// Gets the webhook refresh interval in minutes.
     /// </summary>
@@ -52,7 +53,12 @@ public class TgBotPlayOptions
     /// Gets the secret token for webhook authentication.
     /// </summary>
     public string? Secret { get; private set; }
-    
+
+    /// <summary>
+    /// Gets the base url for access the telegram bot api (this lets you use other Telegram bot compatible APIs)
+    /// </summary>
+    public string? TelegramBotBaseUrl { get; private set; }
+
     /// <summary>
     /// Gets the complete webhook URL constructed from host and route template.
     /// </summary>
@@ -154,6 +160,21 @@ public class TgBotPlayOptions
     }
 
     /// <summary>
+    /// Sets the base url for access the telegram bot api (this lets you use other Telegram bot compatible APIs)
+    /// </summary>
+    /// <param name="url">The base url for access the telegram bot api</param>
+    /// <returns>The current instance for method chaining.</returns>
+    /// <exception cref="ArgumentNullException">url can not be null or empty.</exception>
+    public TgBotPlayOptions WithTelegramBotBaseUrl(string url)
+    {
+        if (string.IsNullOrWhiteSpace(url))
+            throw new ArgumentNullException("url can not be null or empty.", nameof(url));
+        TelegramBotBaseUrl = url;
+
+        return this;
+    }
+
+    /// <summary>
     /// Sets whether to drop pending updates on startup.
     /// </summary>
     /// <param name="dropPendingChanges">True to drop pending updates, false otherwise. Default is false.</param>
@@ -161,7 +182,7 @@ public class TgBotPlayOptions
     public TgBotPlayOptions SetDropPendingUpdates(bool dropPendingChanges = false)
     {
         DropPendingUpdates = dropPendingChanges;
-        
+
         return this;
     }
 
@@ -177,7 +198,7 @@ public enum TgBotPlayConnectionMethod
     /// Uses polling to periodically check for new updates from Telegram.
     /// </summary>
     POLLING,
-    
+
     /// <summary>
     /// Uses webhook to receive updates directly from Telegram via HTTP POST.
     /// </summary>
